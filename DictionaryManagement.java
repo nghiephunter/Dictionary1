@@ -164,17 +164,6 @@ public class DictionaryManagement extends Dictionary {
                 }
                 
             }
-            else if(select1 == 3){
-                Scanner scr = new Scanner(System.in);
-                String delete;
-                System.out.println("Nhap tu muon xoa: ");
-                delete = scr.nextLine();
-                for(Word i : container){
-                    if(i.getWord_target().equals(delete)){
-                        container.remove(i);
-                    }
-                }
-            }
         }
 
     }

@@ -1,0 +1,16 @@
+yellow	vang
+pink	mau hong
+blue	mau xanh
+state	tinh trang
+apartment	can ho
+offer	tra gia
+appear	xuat hien
+pseudo	gia tao
+indent	thut vao
+task	phan viec
+cursor	con tro
+media query	truy van pt
+performance	nang xuat
+layer	lop
+blending	pha tron
+features	dang trung

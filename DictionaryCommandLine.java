@@ -10,8 +10,10 @@ public class DictionaryCommandLine extends DictionaryManagement{
         dnm1.insertFromFile();
         dnm1.showAllWords();
         //dnm1.dictionaryLookup();
-        dnm1.DictionaryChange();
-        dnm1.showAllWords();
+        //dnm1.DictionaryChange();
+        //dnm1.dictionarySearch();
+        //dnm1.showAllWords();
+        dnm1.dictionaryExportToFile();
 
     }
     

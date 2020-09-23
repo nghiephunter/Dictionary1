@@ -1,5 +1,10 @@
+import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.FileWriter;
+import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.Vector;
@@ -24,6 +29,7 @@ public class DictionaryManagement extends Dictionary {
     public void insertFromFile() {
         Vector<String> vt = new Vector<String>();
         String fileName = "C:\\Users\\ADMIN\\Documents\\JavaProjects\\Dictionary\\src\\test.txt";
+        // duong dan tuyet doi
         File file = new File(fileName);
         Scanner sc;
         try {
@@ -122,7 +128,6 @@ public class DictionaryManagement extends Dictionary {
     public void DictionaryChange() {
         int select1 = 0;
         Scanner scan = new Scanner(System.in);
-
         while (select1 != 4) {
             System.out.println("+-+-+-+-+-+-+-+-+-+-+-+-+-");
             System.out.println("Thay doi du lieu: ");
@@ -141,29 +146,117 @@ public class DictionaryManagement extends Dictionary {
                 viet = sc.nextLine();
                 Word e = new Word(eng, viet);
                 container.add(e);
-            }
-            else if(select1 == 2){
+            } else if (select1 == 2) {
                 String fix, change;
                 Scanner scann = new Scanner(System.in);
                 System.out.println("Nhap tu muon sua: ");
                 fix = scann.nextLine();
                 System.out.println(fix);
                 int key3 = 0;
-                for(Word w: container){
+                for (Word w : container) {
                     Scanner scaan = new Scanner(System.in);
-                    if(w.getWord_target().equals(fix)){
-                        System.out.println("Nhap tu thay the: ");
+                    if (w.getWord_target().equals(fix)) {
+                        System.out.println("Nhap nghia thay the: ");
                         change = scaan.nextLine();
                         w.setWord_explain(change);
                         key3 = 1;
                         break;
                     }
                 }
-                if(key3 == 0){
+                if (key3 == 0) {
                     System.out.println("Khong tim thay tu can sua!");
                 }
-                
+            } else if (select1 == 3) {
+                int flag_del = 0;
+                Scanner scr = new Scanner(System.in);
+                String delete;
+                System.out.println("Nhap tu muon xoa: ");
+                delete = scr.nextLine();
+                for (Word i : container) {
+                    if (i.getWord_target().equals(delete)) {
+                        container.remove(container.indexOf(i));
+                        // day la remove 1pt, update remove nhieu phan tu bang removeIf
+                        System.out.println("Xoa thanh cong!");
+                        flag_del = 1;
+                        break;
+                    }
+                }
+                if (flag_del == 0) {
+                    System.out.println("Khong tim thay tu de xoa!");
+                }
+
             }
+        }
+
+    }
+
+    public void dictionarySearch() {
+        int select2 = 0;
+        while (select2 != 3) {
+            System.out.println("**************************");
+            System.out.println("Tra tu gan dung: ");
+            System.out.println("1: Tieng Viet");
+            System.out.println("2: Tieng Anh");
+            System.out.println("3: Thoat");
+            int key4;
+            Scanner scan1 = new Scanner(System.in);
+            key4 = scan1.nextInt();
+            if (key4 == 1) {
+                String str_search;
+                System.out.println("Nhap tu can tra: ");
+                Scanner scan2 = new Scanner(System.in);
+                str_search = scan2.nextLine();
+                for (Word i : container) {
+                    if (i.getWord_explain().contains(str_search)) {
+                        System.out.println(i.getWord_target() + " -> " + i.getWord_explain());
+                    }
+                }
+            } else if (key4 == 2) {
+                String str_search1;
+                System.out.println("Nhap tu can tra: ");
+                Scanner scan3 = new Scanner(System.in);
+                str_search1 = scan3.nextLine();
+                for (Word i : container) {
+                    if (i.getWord_target().contains(str_search1)) {
+                        System.out.println(i.getWord_target() + " -> " + i.getWord_explain());
+                    }
+                }
+
+            }
+        }
+
+    }
+
+    public void dictionaryExportToFile() {
+        // String fileName = "data.txt";
+        // BufferedWriter bw = null;
+        // FileWriter fw = null;
+        // try {
+        //     String dat = "name of love";
+        //     File file = new File(fileName);
+        //     if (!file.exists()) {
+        //         file.createNewFile();
+        //     }
+        //     fw = new FileWriter(file.getAbsoluteFile(), true);
+        //     bw = new BufferedWriter(fw);
+        //     bw.write(dat);
+        //     System.out.println("Xong");
+
+        // } catch (Exception e) {
+        //     // TODO: handle exception
+        //     e.printStackTrace();
+        // }
+        try {
+            FileWriter fw = new FileWriter("data.txt");
+            for(Word i : container){
+                fw.write(i.getWord_target());
+                fw.write("\t");
+                fw.write(i.getWord_explain());
+                fw.write("\n");
+            }
+            fw.close();
+        } catch (Exception e) {
+            //TODO: handle exception
         }
 
     }
